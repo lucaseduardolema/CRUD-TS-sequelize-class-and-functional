@@ -37,5 +37,34 @@ class ProductController {
             res.status(201).end();
         });
     }
+    updateProduct(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            const product = req.body;
+            yield this.productService.updateProduct(id, product);
+            res.status(200).json({ message: "Produto editado com sucesso" });
+        });
+    }
+    deleteProduct(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { id } = req.params;
+            yield this.productService.deleteProduct(id);
+            res.status(204).end();
+        });
+    }
+    getProductsPriceBetwen(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const { from, to } = req.query;
+            const products = yield this.productService.getProductsPriceBetwen(Number(from), Number(to));
+            res.status(200).json(products);
+        });
+    }
+    nonExpirateProducts(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const today = new Date().toISOString();
+            const products = yield this.productService.nonExpirateProducts(today);
+            res.status(200).json(products);
+        });
+    }
 }
 exports.default = ProductController;

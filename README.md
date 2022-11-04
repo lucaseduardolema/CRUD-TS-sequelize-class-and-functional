@@ -1,0 +1,1 @@
+# TypeScrypt e Sequelize (class & functional)
